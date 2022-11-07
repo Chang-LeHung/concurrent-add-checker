@@ -125,3 +125,5 @@ class State(object):
 - 在本项目当中 graph_n=2_all.svg 是当 `data++` 操作的次数等于 2 的时候，所有的指令执行结果的执行流图。
 - graph_n=3.svg 是当 `data++` 操作的次数等于 3 的时候，所有的满足最终的结果等于 2 的情况。
 
+- 如果你运行 ordersimulate.py 文件你可以得到一个 graph.dot 文件，你可以使用命令：`dot -Tsvg/-Tpdf graph.dot -o graph.svg/graph.pdf` 得到对应指令执行流图的 svg 或者 pdf 文件。
+
