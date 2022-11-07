@@ -43,9 +43,9 @@ def dfs(cur_state, states, times, mm, cache, max_times, path):
         #     return None
         statistics[mm.mm] = statistics.get(mm.mm, 0) + 1
         path_count += 1
-        np = [State.mapping(state[0]) + ", " + str(state[1]) + f", pc={path_count}" for state in path[:-1]]
+        np = [State.mapping(state[0]) + ", " + str(state[1]) + "\n" + state[2] + f", pc={path_count}" for state in path[:-1]]
         s = path[len(path) - 1]
-        np.append(State.mapping(s[0]) + ", " + str(s[1]) + f", pc={path_count} ,result = {mm.mm}")
+        np.append(State.mapping(s[0]) + ", " + str(s[1]) + "\n" + s[2] + f", pc={path_count} ,result = {mm.mm}")
         print_path(np)
         return None
 
@@ -68,7 +68,7 @@ def dfs(cur_state, states, times, mm, cache, max_times, path):
                 cache[2] = mm.mm
             elif state[1] == State.ADD:
                 cache[2] += 1
-            path.append([state, 2])
+            path.append([state, 2, f"mm = {mm.mm} core1 = {cache[1]} core2 = {cache[2]}"])
             dfs(state, states, times, mm, cache, max_times, path)
             path.pop()
 
@@ -92,8 +92,7 @@ def dfs(cur_state, states, times, mm, cache, max_times, path):
                 cache[1] = mm.mm
             elif state[0] == State.ADD:
                 cache[1] += 1
-
-            path.append([state, 1])
+            path.append([state, 1, f"mm = {mm.mm} core1 = {cache[1]} core2 = {cache[2]}"])
             dfs(state, states, times, mm, cache, max_times, path)
             path.pop()
 
@@ -123,7 +122,7 @@ if __name__ == '__main__':
     state_1 = [State.NULL, State.LOAD, State.ADD, State.STORE]
     state_2 = [State.NULL, State.LOAD, State.ADD, State.STORE]
     states = list(itertools.product(state_1, state_2))
-    dfs((State.NULL, State.NULL), states, {1: 0, 2: 0}, MM(0), {1: 0, 2: 0}, 2, [[(State.NULL, State.NULL), 0]])
+    dfs((State.NULL, State.NULL), states, {1: 0, 2: 0}, MM(0), {1: 0, 2: 0}, 2, [[(State.NULL, State.NULL), 0, "mm = 0 core1 = 0 core2 = 0"]])
     for (key, val) in unique_node.items():
         if "result = 2" in key:
             print(val, "[label=\"", key, "\", style=filled, color=red];")

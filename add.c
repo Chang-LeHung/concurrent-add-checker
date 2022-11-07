@@ -19,5 +19,6 @@ int main() {
   pthread_create(&t2, NULL, add, NULL);
   pthread_join(t1, NULL);
   pthread_join(t2, NULL);
+  printf("data = %d\n", data);
   return 0;
 }
