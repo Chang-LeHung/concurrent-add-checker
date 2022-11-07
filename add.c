@@ -7,7 +7,7 @@ static int data = 0;
 
 void* add(void* args) {
 
-  for(int i = 0; i < 1000; i++) {
+  for(int i = 0; i < 3; i++) {
     data++;
   }
   return NULL;
